@@ -54,18 +54,107 @@ def pro6(Alist):
 
 
 import random
-l=[random.randint(1,50) for i in range(20)]#创建一个无序的序列
 
-print('无序序列为：{}'.format(l))
 
 #第六章
-#pro7:算法1：二分查找法
+#pro7:算法1：二分查找法 binery serch
 def pro7():
     l = [random.randint(1, 50) for i in range(20)]  # 创建一个无序的序列
+    print('无序序列为：{}'.format(l))
     l.sort()
     print('有序序列为：{}'.format(l))
-    target=input("输入查询值")
+    target=int(input("输入查询值"))
     left=0
     right=len(l)
-    
+    while left<=right:
+        mid=(left+right)//2
+        if(l[mid]>target):
+            right=mid-1
+        elif(l[mid]<target):
+            left=mid+1
+        else:#l[mid]==target
+            print("{}是寻找值".format(l[mid]))
+            break
 
+'''
+
+'''
+#pro8:算法2：二维矩阵的元素查找
+def pro8():
+    l_2d = [
+        [x for x in range(1, 6)],
+        [y for y in range(2, 7)],
+        [z for z in range(3, 8)],
+        [m for m in range(4, 9)]
+    ]
+    target = int(input('请输入您要查找的数字>>>：'))
+    # 是否找到的结果集
+    is_in = False
+    # 行方向起始检索位置：0，即第一行，从上往下
+    row = 0
+    # 最大行数
+    maxrow = len(l) - 1
+    # 列方向起始检索位置：len(l_2d[0]) - 1,即最后一列，从右向左
+    col = len(l_2d[0]) - 1
+    try:
+        # 当列数不断减小且行数不断增大，即从右上 - 左下查找，没有到达左下角顶点时，循环一直执行
+        while col >= 0 and row <= maxrow:
+      # 如果目标值大于当前值，说明在行方向上，目标值在当前值的下面行，则行数+1
+            if target > l_2d[row][col]:
+                row += 1
+    # 如果目标值小于当前值，说明在列方向上，目标值在当前值的左边，则列数-1
+            elif target < l_2d[row][col]:
+                col -= 1
+            else:
+                is_in = True
+                break
+    except Exception as e:
+        pass
+    if is_in:
+        print('找到了！{}在当前序列！'.format(target))
+    else:
+        print('没找到！抱歉了！')
+
+
+#pro9:算法3：有序序列插入
+def pro9():
+    l = [random.randint(1, 50) for i in range(20)]  # 创建一个无序的序列
+    print('无序序列为：{}'.format(l))
+    l.sort()
+    print('有序序列为：{}'.format(l))
+    target = int(input('请输入你要插入的数字>>>:'))
+
+    for i in range(len(l)):
+        if(target<l[0]):
+            index=0
+        elif(target>l[-1]):
+            index=len(l)
+        elif(target<l[i]):
+            index=i
+    l.insert(index,target)
+    print('插入新值后的新的升序序列为：{}'.format(l))
+
+
+#pro10:算法4：统计出现次数最多的元素
+def pro10():
+    l = [random.randint(1, 50) for i in range(20)]  # 创建一个无序的序列
+    print('无序序列为：{}'.format(l))
+    l.sort()
+    print('有序序列为：{}'.format(l))
+    dicts = {}
+    for i in l:
+        if i not in dicts:
+            dicts[i] = 1
+    else:
+        dicts[i] += 1
+    print('各元素的出现次数：{}'.format(dicts))
+    # 存放次数最大的键值
+    iIndex = ''
+    # 存放其对应的键名，键名即列表中出现过的元素
+    iMax = 0
+    # bug版找最大值：当最大次数存在多个元素时只能找到一个
+    for key in dicts:
+        if dicts[key] > iMax:
+            iIndex = key
+    iMax = dicts[key]
+    print("最大元素:{},出现次数{}".format(iIndex,iMax))
