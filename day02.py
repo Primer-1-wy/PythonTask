@@ -158,3 +158,28 @@ def pro10():
             iIndex = key
     iMax = dicts[key]
     print("最大元素:{},出现次数{}".format(iIndex,iMax))
+#第七章
+
+
+#pro11:
+def pro11():
+    def fib(n):
+
+        if n == 1:
+            return 0
+        elif n == 2:
+            return 1
+        else:
+            return fib(n - 1) + fib(n - 2)
+
+
+#pro12:
+def pro12(month):
+
+    if month == 1:
+        return 1
+    elif month == 2:
+        return 1
+    else:
+        return pro12(month - 1) + pro12(month - 2)
+
